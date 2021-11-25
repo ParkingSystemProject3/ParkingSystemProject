@@ -1,5 +1,8 @@
 package com.example.demo.Spot;
 
+import com.example.demo.Floor.Floor;
+import com.example.demo.User.User;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,19 +11,26 @@ public class Spot {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long Floor_id;
     private String slot_type;
     private boolean taking ;
+
+    @ManyToOne (fetch = FetchType.EAGER,optional = true)
+    @JoinColumn(name ="floor_id")
+    private Floor floor ;
+    @ManyToOne (fetch = FetchType.EAGER,optional = true)
+    @JoinColumn(name ="user_id")
+    private User user ;
 
     public Spot() {
 
     }
 
-    public Spot(Long id, Long floor_id, String slot_type, boolean taking) {
+    public Spot(Long id, String slot_type, boolean taking, Floor floor, User user) {
         this.id = id;
-        Floor_id = floor_id;
         this.slot_type = slot_type;
         this.taking = taking;
+        this.floor = floor;
+        this.user = user;
     }
 
     public Long getId() {
@@ -29,14 +39,6 @@ public class Spot {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getFloor_id() {
-        return Floor_id;
-    }
-
-    public void setFloor_id(Long floor_id) {
-        Floor_id = floor_id;
     }
 
     public String getSlot_type() {
@@ -53,5 +55,21 @@ public class Spot {
 
     public void setTaking(boolean taking) {
         this.taking = taking;
+    }
+
+    public Floor getFloor() {
+        return floor;
+    }
+
+    public void setFloor(Floor floor) {
+        this.floor = floor;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
