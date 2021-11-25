@@ -1,6 +1,6 @@
 package com.example.demo.Ticket;
 
-import java.sql.Date;
+import java.sql.Time;
 import javax.persistence.*;
 
 @Entity
@@ -10,20 +10,18 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private Date startDate;
-    private Date endDate;
+    private Time startTime;
+    private Time endTime;
     private double price;
-    private boolean active;
 
     public Ticket() {
     }
 
-    public Ticket(long id, Date startDate, Date endDate, double price, boolean active) {
+    public Ticket(long id, Time startTime, Time endTime, double price) {
         this.id = id;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.price = price;
-        this.active = active;
     }
 
     public long getId() {
@@ -34,20 +32,20 @@ public class Ticket {
         this.id = id;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Time getStartTime() {
+        return startTime;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStartTime(Time startTime) {
+        this.startTime = startTime;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Time getEndTime() {
+        return endTime;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setEndTime(Time endTime) {
+        this.endTime = endTime;
     }
 
     public double getPrice() {
@@ -58,22 +56,14 @@ public class Ticket {
         this.price = price;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 
     @Override
     public String toString() {
         return "Ticket{" +
                 "id=" + id +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
+                ", startDate=" + startTime +
+                ", endDate=" + endTime +
                 ", price=" + price +
-                ", active=" + active +
                 '}';
     }
 }
