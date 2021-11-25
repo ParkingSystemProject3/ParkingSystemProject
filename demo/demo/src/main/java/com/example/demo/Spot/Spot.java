@@ -11,6 +11,9 @@ public class Spot {
     private Long Floor_id;
     private boolean slot_type;
 
+    public Spot() {
+
+    }
     public Spot(Long id, Long floor_id, boolean slot_type) {
         this.id = id;
         Floor_id = floor_id;
