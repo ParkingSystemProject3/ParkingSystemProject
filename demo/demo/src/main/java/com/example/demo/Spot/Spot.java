@@ -9,15 +9,18 @@ public class Spot {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long Floor_id;
-    private boolean slot_type;
+    private String slot_type;
+    private boolean taking ;
 
     public Spot() {
 
     }
-    public Spot(Long id, Long floor_id, boolean slot_type) {
+
+    public Spot(Long id, Long floor_id, String slot_type, boolean taking) {
         this.id = id;
         Floor_id = floor_id;
         this.slot_type = slot_type;
+        this.taking = taking;
     }
 
     public Long getId() {
@@ -36,11 +39,19 @@ public class Spot {
         Floor_id = floor_id;
     }
 
-    public boolean isSlot_type() {
+    public String getSlot_type() {
         return slot_type;
     }
 
-    public void setSlot_type(boolean slot_type) {
+    public void setSlot_type(String slot_type) {
         this.slot_type = slot_type;
+    }
+
+    public boolean isTaking() {
+        return taking;
+    }
+
+    public void setTaking(boolean taking) {
+        this.taking = taking;
     }
 }
