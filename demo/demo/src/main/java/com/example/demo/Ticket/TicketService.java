@@ -39,10 +39,9 @@ public class TicketService {
         Ticket ticket = ticketRepository.findById(ticketId).orElse(null);
 
         if (ticket != null){
-            ticket.setStartDate(data.getStartDate());
-            ticket.setEndDate(data.getEndDate());
+            ticket.setStartTime(data.getStartTime());
+            ticket.setEndTime(data.getEndTime());
             ticket.setPrice(data.getPrice());
-            ticket.setActive(data.isActive());
             ticketRepository.save(ticket);
         }
 
