@@ -1,6 +1,10 @@
 package com.example.demo.Floor;
 
+import com.example.demo.Spot.Spot;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "floor")
@@ -11,6 +15,9 @@ public class Floor {
     private String name;
     private  int floor_park;
     private  int full_park;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "floor")
+    private List<Spot> spots = new ArrayList<>();
 
     public Floor() {
     }

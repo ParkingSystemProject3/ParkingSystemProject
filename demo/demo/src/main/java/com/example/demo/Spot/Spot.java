@@ -1,6 +1,12 @@
 package com.example.demo.Spot;
 
+import com.example.demo.Floor.Floor;
+import com.example.demo.User.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "spot")
@@ -8,19 +14,28 @@ public class Spot {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long Floor_id;
     private String slot_type;
     private boolean taking ;
+
+    @ManyToOne (fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name ="floor_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Floor floor ;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "spot")
+    private List<User> users = new ArrayList<>();
 
     public Spot() {
 
     }
 
-    public Spot(Long id, Long floor_id, String slot_type, boolean taking) {
+
+    public Spot(Long id, String slot_type, boolean taking, Floor floor, List<User> users) {
         this.id = id;
-        Floor_id = floor_id;
         this.slot_type = slot_type;
         this.taking = taking;
+        this.floor = floor;
+        this.users = users;
     }
 
     public Long getId() {
@@ -29,14 +44,6 @@ public class Spot {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getFloor_id() {
-        return Floor_id;
-    }
-
-    public void setFloor_id(Long floor_id) {
-        Floor_id = floor_id;
     }
 
     public String getSlot_type() {
@@ -53,5 +60,21 @@ public class Spot {
 
     public void setTaking(boolean taking) {
         this.taking = taking;
+    }
+
+    public Floor getFloor() {
+        return floor;
+    }
+
+    public void setFloor(Floor floor) {
+        this.floor = floor;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
