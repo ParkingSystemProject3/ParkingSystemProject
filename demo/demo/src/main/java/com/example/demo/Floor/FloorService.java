@@ -17,6 +17,7 @@ public class FloorService {
     }
 
     public Floor getFloor(String id){
+
         Long floor_id = Long.parseLong(id);
         System.out.println("id12131232323"+floor_id );
         System.out.println(" floorRepository"+floorRepository.findById(floor_id).orElse(null) );
