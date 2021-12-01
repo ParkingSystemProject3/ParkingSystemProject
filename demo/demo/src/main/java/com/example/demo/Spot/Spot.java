@@ -2,6 +2,7 @@ package com.example.demo.Spot;
 
 import com.example.demo.Floor.Floor;
 import com.example.demo.User.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
@@ -14,11 +15,13 @@ public class Spot {
     private String slot_type;
     private boolean taking ;
 
-    @ManyToOne (fetch = FetchType.EAGER,optional = true)
+    @ManyToOne (fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name ="floor_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Floor floor ;
-    @ManyToOne (fetch = FetchType.EAGER,optional = true)
+    @ManyToOne (fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name ="user_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private User user ;
 
     public Spot() {

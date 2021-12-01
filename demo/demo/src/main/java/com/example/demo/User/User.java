@@ -1,6 +1,10 @@
 package com.example.demo.User;
 
+import com.example.demo.Spot.Spot;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -14,6 +18,8 @@ public class User {
     private String platNumber;
     private Long phone ;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Spot> spots = new ArrayList<>();
 
     public User() {
     }
