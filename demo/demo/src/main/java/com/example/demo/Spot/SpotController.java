@@ -30,3 +30,4 @@ public class SpotController {
         return SpotService.createSpot(spot);
     }
 }
+

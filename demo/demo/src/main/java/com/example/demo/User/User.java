@@ -1,6 +1,12 @@
 package com.example.demo.User;
 
+import com.example.demo.Spot.Spot;
+import com.example.demo.Ticket.Ticket;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -13,17 +19,24 @@ public class User {
     private String lName;
     private String platNumber;
     private Long phone ;
-
+    @ManyToOne (fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name ="spot_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Spot spot ;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Ticket> tickets = new ArrayList<>();
 
     public User() {
     }
 
-    public User(Long id, String fName, String lName, String platNumber, Long phone) {
+    public User(Long id, String fName, String lName, String platNumber, Long phone, Spot spot, List<Ticket> tickets) {
         this.id = id;
         this.fName = fName;
         this.lName = lName;
         this.platNumber = platNumber;
         this.phone = phone;
+        this.spot = spot;
+        this.tickets = tickets;
     }
 
     public Long getId() {
@@ -66,14 +79,19 @@ public class User {
         this.phone = phone;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", fName='" + fName + '\'' +
-                ", lName='" + lName + '\'' +
-                ", platNumber='" + platNumber + '\'' +
-                ", phone=" + phone +
-                '}';
+    public Spot getSpot() {
+        return spot;
+    }
+
+    public void setSpot(Spot spot) {
+        this.spot = spot;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }
