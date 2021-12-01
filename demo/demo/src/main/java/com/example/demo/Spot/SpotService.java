@@ -12,13 +12,11 @@ import java.util.List;
 @Service
 public class SpotService {
     private final SpotRepository spotRepository ;
-    private  final UserRepository userRepository ;
     private  final FloorRepository floorRepository;
 
     @Autowired
-    public SpotService(SpotRepository spotRepository, UserRepository userRepository, FloorRepository floorRepository) {
+    public SpotService(SpotRepository spotRepository,  FloorRepository floorRepository) {
         this.spotRepository = spotRepository;
-        this.userRepository = userRepository;
         this.floorRepository = floorRepository;
     }
 
@@ -30,16 +28,16 @@ public class SpotService {
         Long spot_id = Long.parseLong(id);
         return spotRepository.findById(spot_id).orElse(null);
     }
-    public  Spot createSpot(Spot spot ,Long user_id ,Long floor_id){
-        System.out.println(user_id);
-        System.out.println(floor_id);
-        User user =userRepository.findById(user_id).orElse(null);
-        System.out.println(user);
-        spot.setUser(user);
-        Floor floor =floorRepository.findById(floor_id).orElse(null);
-        spot.setFloor(floor);
-        System.out.println(floor);
-        return spotRepository.save(spot);
+    public  Spot createSpot(Spot spot){
+
+        Long floorId = spot.getFloor().getId();
+        Floor floor = floorRepository.getById(floorId);
+
+        if(floor != null ){
+            spot.setFloor(floor);
+            return spotRepository.save(spot);
+        }
+        return null;
 
     }
 }

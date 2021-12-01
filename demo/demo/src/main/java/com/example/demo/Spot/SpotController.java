@@ -26,32 +26,8 @@ public class SpotController {
     }
 
     @PostMapping
-    public Spot createSpot(@RequestBody Form form){
-        System.out.println(form.getFloor_id());
-        return SpotService.createSpot(form.getSpot(),form.getUser_id(),form.getFloor_id());
+    public Spot createSpot(@RequestBody Spot spot){
+        return SpotService.createSpot(spot);
     }
 }
 
-class Form{
-    private Spot spot;
-    private Long user_id;
-    private  Long floor_id;
-
-    public Form(Spot spot, Long user_id, Long floor_id) {
-        this.spot = spot;
-        this.user_id = user_id;
-        this.floor_id = floor_id;
-    }
-
-    public Spot getSpot() {
-        return spot;
-    }
-
-    public Long getUser_id() {
-        return user_id;
-    }
-
-    public Long getFloor_id() {
-        return floor_id;
-    }
-}

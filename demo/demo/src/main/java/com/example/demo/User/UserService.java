@@ -1,5 +1,7 @@
 package com.example.demo.User;
 
+import com.example.demo.Spot.Spot;
+import com.example.demo.Spot.SpotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +11,12 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final SpotRepository spotRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, SpotRepository spotRepository) {
         this.userRepository = userRepository;
+        this.spotRepository = spotRepository;
     }
 
 
@@ -26,7 +30,14 @@ public class UserService {
     }
 
     public User createUser(User user){
-        return userRepository.save(user);
+        Long spotId = user.getSpot().getId();
+        Spot spot = spotRepository.getById(spotId);
+        if(spot != null){
+            user.setSpot(spot);
+            return userRepository.save(user);
+        }
+        return null;
+
 
     }
 

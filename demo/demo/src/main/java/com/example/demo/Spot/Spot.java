@@ -2,8 +2,11 @@ package com.example.demo.Spot;
 
 import com.example.demo.Floor.Floor;
 import com.example.demo.User.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "spot")
@@ -14,23 +17,25 @@ public class Spot {
     private String slot_type;
     private boolean taking ;
 
-    @ManyToOne (fetch = FetchType.EAGER,optional = true)
+    @ManyToOne (fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name ="floor_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Floor floor ;
-    @ManyToOne (fetch = FetchType.EAGER,optional = true)
-    @JoinColumn(name ="user_id")
-    private User user ;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "spot")
+    private List<User> users = new ArrayList<>();
 
     public Spot() {
 
     }
 
-    public Spot(Long id, String slot_type, boolean taking, Floor floor, User user) {
+
+    public Spot(Long id, String slot_type, boolean taking, Floor floor, List<User> users) {
         this.id = id;
         this.slot_type = slot_type;
         this.taking = taking;
         this.floor = floor;
-        this.user = user;
+        this.users = users;
     }
 
     public Long getId() {
@@ -65,11 +70,11 @@ public class Spot {
         this.floor = floor;
     }
 
-    public User getUser() {
-        return user;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
