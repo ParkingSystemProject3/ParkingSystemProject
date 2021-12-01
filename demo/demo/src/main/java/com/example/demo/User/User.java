@@ -1,6 +1,7 @@
 package com.example.demo.User;
 
 import com.example.demo.Spot.Spot;
+import com.example.demo.Ticket.Ticket;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -18,23 +19,24 @@ public class User {
     private String lName;
     private String platNumber;
     private Long phone ;
-
     @ManyToOne (fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name ="spot_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Spot spot ;
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Ticket> tickets = new ArrayList<>();
 
     public User() {
     }
 
-    public User(Long id, String fName, String lName, String platNumber, Long phone, Spot spot) {
+    public User(Long id, String fName, String lName, String platNumber, Long phone, Spot spot, List<Ticket> tickets) {
         this.id = id;
         this.fName = fName;
         this.lName = lName;
         this.platNumber = platNumber;
         this.phone = phone;
         this.spot = spot;
+        this.tickets = tickets;
     }
 
     public Long getId() {
@@ -83,5 +85,13 @@ public class User {
 
     public void setSpot(Spot spot) {
         this.spot = spot;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

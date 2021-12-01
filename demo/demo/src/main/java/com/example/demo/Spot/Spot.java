@@ -1,6 +1,7 @@
 package com.example.demo.Spot;
 
 import com.example.demo.Floor.Floor;
+import com.example.demo.Ticket.Ticket;
 import com.example.demo.User.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -24,18 +25,20 @@ public class Spot {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "spot")
     private List<User> users = new ArrayList<>();
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "spot")
+    private List<Ticket> tickets = new ArrayList<>();
     public Spot() {
 
     }
 
 
-    public Spot(Long id, String slot_type, boolean taking, Floor floor, List<User> users) {
+    public Spot(Long id, String slot_type, boolean taking, Floor floor, List<User> users, List<Ticket> tickets) {
         this.id = id;
         this.slot_type = slot_type;
         this.taking = taking;
         this.floor = floor;
         this.users = users;
+        this.tickets = tickets;
     }
 
     public Long getId() {
@@ -76,5 +79,13 @@ public class Spot {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }
