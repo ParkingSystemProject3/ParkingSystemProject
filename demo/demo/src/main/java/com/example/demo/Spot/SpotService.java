@@ -7,6 +7,7 @@ import com.example.demo.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -20,9 +21,9 @@ public class SpotService {
         this.floorRepository = floorRepository;
     }
 
-    public List<Spot> getSpots(){
-        return spotRepository.findAll();
-    }
+//    public List<Spot> getSpots(){
+//        return spotRepository.findAll();
+//    }
 
     public Spot getSpot(String id){
         Long spot_id = Long.parseLong(id);
@@ -39,5 +40,21 @@ public class SpotService {
         }
         return null;
 
+    }
+    public Spot getAvailableSpot(String id){
+
+        System.out.println(id);
+        if(id.equals("normal")){
+            return spotRepository.findAvailableNormalSpot(false,"normal");
+        }
+        else{
+            return spotRepository.findAvailableNormalSpot(false,"not_normal");
+        }
+
+
+    }
+    public void updateTaking(Spot spot){
+      spot.setTaking(!spot.isTaking());
+        spotRepository.save(spot);
     }
 }
