@@ -59,7 +59,7 @@ public class Floor {
     }
 
     public void setFull_park(int full_park) {
-        full_park = full_park;
+        this.full_park = full_park;
     }
 }
 
