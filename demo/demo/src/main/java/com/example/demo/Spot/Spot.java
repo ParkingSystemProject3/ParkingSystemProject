@@ -21,7 +21,7 @@ public class Spot {
     @ManyToOne (fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name ="floor_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Floor floor ;
+    private Floor floor;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "spot")
     private List<User> users = new ArrayList<>();
