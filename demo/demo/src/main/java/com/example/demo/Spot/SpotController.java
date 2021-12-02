@@ -14,18 +14,6 @@ public class SpotController {
         this.SpotService = spotService;
     }
 
-//    @GetMapping
-//    public List<Spot> getSpots(){
-//        return SpotService.getSpots();
-//
-//    }
-
-//    @GetMapping("/{id}")
-//    public Spot getSpot(@PathVariable String id){
-//        return SpotService.getSpot(id);
-//
-//    }
-
     @PostMapping
     public Spot createSpot(@RequestBody Spot spot){
         return SpotService.createSpot(spot);
@@ -41,4 +29,3 @@ public class SpotController {
         SpotService.updateTaking(spot);
     }
 }
-
