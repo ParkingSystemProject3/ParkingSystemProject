@@ -1,5 +1,6 @@
 package com.example.demo.Floor;
 
+import com.example.demo.Spot.Spot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -31,5 +32,11 @@ public class FloorService {
         Long floor_id = Long.parseLong(id);
         floorRepository.deleteById(floor_id);
 
+    }
+
+    public void updateFullPark(Floor floor){
+    floor.setFull_park(1);
+        System.out.println(floor.getFull_park());
+        floorRepository.save(floor);
     }
 }
