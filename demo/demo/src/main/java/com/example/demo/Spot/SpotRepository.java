@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SpotRepository extends JpaRepository<Spot, Long> {
 
-
     @Query(value ="select * from spot where taking = ?1 and slot_type = ?2 limit 1",nativeQuery = true)
      public Spot findAvailableNormalSpot(boolean bool,String str);
 
