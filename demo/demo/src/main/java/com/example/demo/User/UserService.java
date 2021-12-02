@@ -2,6 +2,8 @@ package com.example.demo.User;
 
 import com.example.demo.Spot.Spot;
 import com.example.demo.Spot.SpotRepository;
+import com.example.demo.Spot.SpotController;
+import com.example.demo.Floor.FloorController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +14,14 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final SpotRepository spotRepository;
-
+    private final SpotController spotController;
+    private  final FloorController floorController;
     @Autowired
-    public UserService(UserRepository userRepository, SpotRepository spotRepository) {
+    public UserService(UserRepository userRepository, SpotRepository spotRepository, SpotController spotController, FloorController floorController) {
         this.userRepository = userRepository;
         this.spotRepository = spotRepository;
+        this.spotController = spotController;
+        this.floorController = floorController;
     }
 
 
@@ -29,9 +34,19 @@ public class UserService {
         return userRepository.findById(user_id).orElse(null);
     }
 
+    public User updeateTick(String id ){
+        Long user_id = Long.parseLong(id);
+
+
+        return userRepository.findById(user_id).orElse(null);
+    }
+
     public User createUser(User user){
         Long spotId = user.getSpot().getId();
         Spot spot = spotRepository.getById(spotId);
+        spotController.updateTaking(spot);
+        floorController.updateFullPark(spot.getFloor());
+        System.out.println(spot.getFloor().getName());
         if(spot != null){
             user.setSpot(spot);
             return userRepository.save(user);

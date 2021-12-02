@@ -35,4 +35,8 @@ public class FloorController {
         floorService.deleteFloor(id);
 
     }
+    @PutMapping
+    public void updateFullPark(Floor floor){
+         floorService.updateFullPark(floor);
+    }
 }
