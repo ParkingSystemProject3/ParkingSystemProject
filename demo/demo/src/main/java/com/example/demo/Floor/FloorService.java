@@ -19,12 +19,17 @@ public class FloorService {
     public Floor getFloor(String id){
 
         Long floor_id = Long.parseLong(id);
-        System.out.println("id12131232323"+floor_id );
         System.out.println(" floorRepository"+floorRepository.findById(floor_id).orElse(null) );
         return floorRepository.findById(floor_id).orElse(null);
     }
     public  Floor createFloor(Floor floor){
         return floorRepository.save(floor);
+
+    }
+
+    public void deleteFloor(String id){
+        Long floor_id = Long.parseLong(id);
+        floorRepository.deleteById(floor_id);
 
     }
 }
