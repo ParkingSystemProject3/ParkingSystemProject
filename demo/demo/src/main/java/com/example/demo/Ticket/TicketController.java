@@ -1,5 +1,7 @@
 package com.example.demo.Ticket;
 
+import com.example.demo.Spot.Spot;
+import com.example.demo.User.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +22,8 @@ public class TicketController {
     }
 
     @PostMapping
-    public Ticket addTicket(@RequestBody Ticket ticket){
-        return ticketService.addTicket(ticket);
+    public Ticket addTicket(@RequestBody User user , Spot spot){
+        return ticketService.addTicket(user , spot);
     }
 
     @GetMapping("/{id}")
@@ -35,8 +37,8 @@ public class TicketController {
 
     }
 
-    @PutMapping("/{id}")
-    public void updateTodo(@PathVariable String id, @RequestBody Ticket data){
-        ticketService.updateTicket(id, data);
-    }
+//    @PutMapping("/{id}")
+//    public void updateTodo(@PathVariable String id, @RequestBody Ticket data){
+//        ticketService.updateTicket(id, data);
+//    }
 }

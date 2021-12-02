@@ -5,6 +5,8 @@ import com.example.demo.Spot.SpotRepository;
 import com.example.demo.User.User;
 import com.example.demo.User.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,14 +28,13 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
-    public Ticket addTicket(Ticket ticket){
-        long user_id=ticket.getUser().getId();
-        User user=userRepository.getById(user_id);
-        long spot_id=ticket.getSpot().getId();
-        Spot spot=spotRepository.getById(spot_id);
+    public Ticket addTicket(User user , Spot spot){
+        Ticket ticket=new Ticket();
         if(user !=null && spot!=null){
             ticket.setUser(user);
             ticket.setSpot(spot);
+            System.out.println(LocalTime.now());
+            ticket.setStartTime(LocalTime.now());
             return ticketRepository.save(ticket);
         }
         return null;
@@ -51,16 +52,16 @@ public class TicketService {
 
     }
 
-    public void updateTicket(String id, Ticket data){
-        Long ticketId = Long.parseLong(id);
-        Ticket ticket = ticketRepository.findById(ticketId).orElse(null);
+//    public void updateTicket(String id, Ticket data){
+//        Long ticketId = Long.parseLong(id);
+//        Ticket ticket = ticketRepository.findById(ticketId).orElse(null);
+//
+//        if (ticket != null){
+//            ticket.setStartTime(data.getStartTime());
+//            ticket.setEndTime(data.getEndTime());
+//            ticket.setPrice(data.getPrice());
+//            ticketRepository.save(ticket);
+//        }
 
-        if (ticket != null){
-            ticket.setStartTime(data.getStartTime());
-            ticket.setEndTime(data.getEndTime());
-            ticket.setPrice(data.getPrice());
-            ticketRepository.save(ticket);
-        }
-
-    }
+//    }
 }
