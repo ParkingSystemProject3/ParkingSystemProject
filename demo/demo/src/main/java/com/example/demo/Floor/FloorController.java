@@ -29,4 +29,10 @@ public class FloorController {
     public Floor createFloor(@RequestBody Floor floor){
         return floorService.createFloor(floor);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteFloor(@PathVariable String id){
+        floorService.deleteFloor(id);
+
+    }
 }
