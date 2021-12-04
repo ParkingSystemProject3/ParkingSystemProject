@@ -28,12 +28,13 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
-    public Ticket addTicket(User user , Spot spot){
-        Ticket ticket=new Ticket();
-        if(user !=null && spot!=null){
+    public Ticket addTicket(String id){
+        Ticket ticket =new Ticket();
+        Long userId = Long.parseLong(id);
+        System.out.println(userId);
+        User user = userRepository.getById(userId);
+        if(user != null){
             ticket.setUser(user);
-            ticket.setSpot(spot);
-            System.out.println(LocalTime.now());
             ticket.setStartTime(LocalTime.now());
             return ticketRepository.save(ticket);
         }
@@ -52,16 +53,16 @@ public class TicketService {
 
     }
 
-//    public void updateTicket(String id, Ticket data){
-//        Long ticketId = Long.parseLong(id);
-//        Ticket ticket = ticketRepository.findById(ticketId).orElse(null);
-//
-//        if (ticket != null){
-//            ticket.setStartTime(data.getStartTime());
-//            ticket.setEndTime(data.getEndTime());
-//            ticket.setPrice(data.getPrice());
-//            ticketRepository.save(ticket);
-//        }
+    public void updateTicket(String id, Ticket data){
+        Long ticketId = Long.parseLong(id);
+        Ticket ticket = ticketRepository.findById(ticketId).orElse(null);
 
-//    }
+        if (ticket != null){
+            ticket.setStartTime(data.getStartTime());
+            ticket.setEndTime(data.getEndTime());
+            ticket.setPrice(data.getPrice());
+            ticketRepository.save(ticket);
+        }
+
+    }
 }
