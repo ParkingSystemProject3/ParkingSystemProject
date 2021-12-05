@@ -31,6 +31,7 @@ public class TicketService {
         User user=userRepository.getById(user_id);
         long spot_id=ticket.getSpot().getId();
         Spot spot=spotRepository.getById(spot_id);
+
         if(user !=null && spot!=null){
             ticket.setUser(user);
             ticket.setSpot(spot);
