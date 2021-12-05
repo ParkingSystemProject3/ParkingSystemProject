@@ -50,10 +50,9 @@ public class TicketService {
         return null;
     }
 
-    public Ticket getTicket(String id) {
+    public Ticket getTicket(String platNum) {
 
-        Long ticketId = Long.parseLong(id);
-        return ticketRepository.findById(ticketId).orElse(null);
+        return ticketRepository.findTicketByPlatNumber(platNum);
     }
 
     public void deleteTicket(String id){
