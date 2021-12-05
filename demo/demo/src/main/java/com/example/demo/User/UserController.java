@@ -30,9 +30,9 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user){
+    public void createUser(@RequestBody User user){
 
-        return userService.createUser(user);
+         userService.createUser(user);
     }
 
 

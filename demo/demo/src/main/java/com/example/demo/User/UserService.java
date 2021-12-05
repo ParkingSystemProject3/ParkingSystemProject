@@ -50,16 +50,16 @@ public class UserService {
         return userRepository.findById(user_id).orElse(null);
     }
 
-    public User createUser(User user){
+    public void createUser(User user){
         Long spotId = user.getSpot().getId();
         Spot spot = spotRepository.getById(spotId);
         spotController.updateTaking(spot);
         floorController.updateFullPark(spot.getFloor(),1);
         if(spot != null){
             user.setSpot(spot);
-            return userRepository.save(user);
+            userRepository.save(user);
         }
-        return null;
+        ticketController.addTicket(user);
 
 
     }
