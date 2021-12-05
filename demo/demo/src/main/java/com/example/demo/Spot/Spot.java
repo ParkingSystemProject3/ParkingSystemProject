@@ -25,20 +25,17 @@ public class Spot {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "spot")
     private List<User> users = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "spot")
-    private List<Ticket> tickets = new ArrayList<>();
+
     public Spot() {
 
     }
 
-
-    public Spot(Long id, String slot_type, boolean taking, Floor floor, List<User> users, List<Ticket> tickets) {
+    public Spot(Long id, String slot_type, boolean taking, Floor floor, List<User> users) {
         this.id = id;
         this.slot_type = slot_type;
         this.taking = taking;
         this.floor = floor;
         this.users = users;
-        this.tickets = tickets;
     }
 
     public Long getId() {
@@ -79,13 +76,5 @@ public class Spot {
 
     public void setUsers(List<User> users) {
         this.users = users;
-    }
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
     }
 }
