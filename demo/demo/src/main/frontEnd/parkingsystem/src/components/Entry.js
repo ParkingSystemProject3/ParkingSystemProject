@@ -2,6 +2,7 @@ import axios from "axios";
 
  function Entry(){
      let slotType;
+     let data={id:0};
 
 function getSpot(event){
     event.preventDefault();
@@ -9,7 +10,8 @@ function getSpot(event){
     if (slotType=="normal"){
         console.log("inin")
         axios.get("http://localhost:8080/spot/normal")
-        .then(function (response) {   
+        .then(function (response) { 
+            data=response.data;  
      console.log(response.data);       
          })    
            .catch(function (error) {    
@@ -18,7 +20,7 @@ function getSpot(event){
     }
    
     else{
-        axios.get("npm")
+        axios.get("http://localhost:8080/spot/not_normal")
         .then(function (response) {   
      console.log(response.data);       
          })    
@@ -57,7 +59,7 @@ function addUser(event){
   <label for="Special Needs"> Special Needs</label><br></br>
   <button onClick={getSpot} > submit </button>
   </form>
-
+<h1>{data.id}</h1>
   <form>
 <label for="fname">First name:</label><br></br>
 <input type="text" id="fname" name="fname"/>
