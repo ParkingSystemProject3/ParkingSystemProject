@@ -36,7 +36,9 @@ public class FloorController {
 
     }
     @PutMapping
-    public void updateFullPark(Floor floor){
-         floorService.updateFullPark(floor);
+    public void updateFullPark(Floor floor,int num){
+         floorService.updateFullPark(floor,num);
     }
+
+
 }

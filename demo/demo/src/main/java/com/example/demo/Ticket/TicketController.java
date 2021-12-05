@@ -36,8 +36,8 @@ public class TicketController {
 
     }
 
-    @PutMapping("/{id}")
-    public void updateTodo(@PathVariable String id, @RequestBody Ticket data){
-        ticketService.updateTicket(id, data);
+    @PutMapping("/{plate_num}")
+    public void updateTodo(@PathVariable String plate_num){
+        ticketService.updateTicket(plate_num);
     }
 }

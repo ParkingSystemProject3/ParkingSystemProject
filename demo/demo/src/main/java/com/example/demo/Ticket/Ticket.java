@@ -2,6 +2,8 @@ package com.example.demo.Ticket;
 
 import com.example.demo.User.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.time.Instant;
 import java.time.LocalTime;
 import javax.persistence.*;
 
@@ -12,8 +14,8 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private Instant startTime;
+    private Instant endTime;
     private double price;
     @ManyToOne (fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name ="user_id")
@@ -23,7 +25,7 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(long id, LocalTime startTime, LocalTime endTime, double price, User user) {
+    public Ticket(long id, Instant startTime, Instant endTime, double price, User user) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -39,19 +41,19 @@ public class Ticket {
         this.id = id;
     }
 
-    public LocalTime getStartTime() {
+    public Instant getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(Instant startTime) {
         this.startTime = startTime;
     }
 
-    public LocalTime getEndTime() {
+    public Instant getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(Instant endTime) {
         this.endTime = endTime;
     }
 
