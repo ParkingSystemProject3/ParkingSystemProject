@@ -37,11 +37,11 @@ public class TicketService {
     }
 
 
-    public Ticket addTicket(String id){
+    public Ticket addTicket(User user){
         Ticket ticket =new Ticket();
-        Long userId = Long.parseLong(id);
+        Long userId = user.getId();
         System.out.println(userId);
-        User user = userRepository.getById(userId);
+        userRepository.getById(userId);
         if(user != null){
             ticket.setUser(user);
             ticket.setStartTime(Instant.now());
@@ -50,10 +50,9 @@ public class TicketService {
         return null;
     }
 
-    public Ticket getTicket(String id) {
+    public Ticket getTicket(String platNum) {
 
-        Long ticketId = Long.parseLong(id);
-        return ticketRepository.findById(ticketId).orElse(null);
+        return ticketRepository.findTicketByPlatNumber(platNum);
     }
 
     public void deleteTicket(String id){
