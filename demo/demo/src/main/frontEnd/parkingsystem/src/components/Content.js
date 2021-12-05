@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Col, Row, Nav, Form,  } from "react-bootstrap";
 function Content(){
 
@@ -14,3 +15,5 @@ function Content(){
     )
 }
 export default Content;
+=======
+>>>>>>> 34332992039ae1a6301ecf753ea216de4b9461bd

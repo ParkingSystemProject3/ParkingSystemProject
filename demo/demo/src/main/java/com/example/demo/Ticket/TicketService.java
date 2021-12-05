@@ -36,6 +36,7 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
+
     public Ticket addTicket(String id){
         Ticket ticket =new Ticket();
         Long userId = Long.parseLong(id);
