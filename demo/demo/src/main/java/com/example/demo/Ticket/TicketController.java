@@ -1,6 +1,7 @@
 package com.example.demo.Ticket;
 
 
+import com.example.demo.User.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,9 +21,9 @@ public class TicketController {
         return ticketService.getTickets();
     }
 
-    @PostMapping("/{id}")
-    public Ticket addTicket(@PathVariable String id){
-        return ticketService.addTicket(id);
+    @PostMapping
+    public Ticket addTicket(User user){
+        return ticketService.addTicket(user);
     }
 
     @GetMapping("/{id}")
