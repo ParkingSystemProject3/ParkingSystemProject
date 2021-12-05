@@ -34,8 +34,16 @@ public class FloorService {
 
     }
 
-    public void updateFullPark(Floor floor){
+    public void updateFullPark(Floor floor,int num){
+
+        if(num ==1){
     floor.setFull_park(floor.getFull_park()+1);
+        floorRepository.save(floor);}
+        else{
+            floor.setFull_park(floor.getFull_park()-1);
         floorRepository.save(floor);
+        }
     }
+
+
 }
