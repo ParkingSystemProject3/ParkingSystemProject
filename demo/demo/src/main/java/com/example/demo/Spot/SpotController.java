@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping(path="spot")
 public class SpotController {
