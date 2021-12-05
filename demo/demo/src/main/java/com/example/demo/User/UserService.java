@@ -52,7 +52,7 @@ public class UserService {
 
     public User createUser(User user){
         Long spotId = user.getSpot().getId();
-        Spot spot = spotRepository.findById(spotId).orElse(null);
+        Spot spot = spotRepository.getById(spotId);
         spotController.updateTaking(spot);
         floorController.updateFullPark(spot.getFloor(),1);
         if(spot != null){
