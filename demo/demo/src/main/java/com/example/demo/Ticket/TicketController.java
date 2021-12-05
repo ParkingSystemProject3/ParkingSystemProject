@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping(path= "ticket")
 public class TicketController {
@@ -26,9 +27,9 @@ public class TicketController {
         return ticketService.addTicket(user);
     }
 
-    @GetMapping("/{id}")
-    public Ticket getTicket(@PathVariable String id){
-        return ticketService.getTicket(id);
+    @GetMapping("/{platNum}")
+    public Ticket getTicket(@PathVariable String platNum){
+        return ticketService.getTicket(platNum);
 
     }
     @DeleteMapping("/{id}")
