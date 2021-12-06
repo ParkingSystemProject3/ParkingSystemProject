@@ -1,4 +1,7 @@
 import axios from "axios";
+import React from 'react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 function Exit() {
     // هذا المتغير يكون فيه معلومات التكت اللي تنطبع على الشاشة
