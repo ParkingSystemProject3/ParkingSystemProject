@@ -40,12 +40,12 @@ function Exit() {
         <input type="text" id="platnum" name="platNum" className="input" />
       </div>
       <div className="group">
-        <input
+        <button
           onClick={ExitUser}
-          type="submit"
+         
           className="button"
           defaultValue="Sign Up"
-        />
+        >submit</button>
         <br></br>
         <Popup trigger={<button className="button">Print ticket</button>} position="bottom center">
     <div>
