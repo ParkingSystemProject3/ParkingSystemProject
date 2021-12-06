@@ -1,20 +1,26 @@
 import axios from "axios";
+import React, { useState } from 'react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import { useModal } from 'react-hooks-use-modal';
+
 
 function Entry() {
+  const [Modal, open, close, isOpen] = useModal('root', {
+    preventScroll: true,
+    closeOnOverlayClick: false
+  });
   let slotType;
-  let data = { id: 0 };
+  const[id,setId]=useState(0);
 
-  function getSpot(event) {
-    event.preventDefault();
+  function getSpot() {
     console.log("in");
     if (slotType == "normal") {
       console.log("inin");
       axios
         .get("http://localhost:8080/spot/normal")
         .then(function (response) {
-          data = response.data.id;
-          alert(" normal " + response.id);
-          console.log(response.id);
+          setId(response.data.id);
         })
         .catch(function (error) {
           console.error(error);
@@ -23,9 +29,7 @@ function Entry() {
       axios
         .get("http://localhost:8080/spot/not_normal")
         .then(function (response) {
-          console.log(response.data.id);
-          data = response.data.id;
-          alert(" the spot emity is " + data);
+          setId(response.data.id);
         })
         .catch(function (error) {
           console.error(error);
@@ -56,6 +60,7 @@ function Entry() {
       .catch(function (error) {
         console.error(error);
       });
+      open();
   }
 
   return (
@@ -68,6 +73,7 @@ function Entry() {
           name="Special Needs"
           onClick={() => {
             slotType = "normal";
+            getSpot();
           }}
           value="Special Needs"
         />
@@ -81,26 +87,30 @@ function Entry() {
           value="Special Needs"
           onClick={() => {
             slotType = "Notnormal";
-            console.log("ff");
+            getSpot();
           }}
         />
       </div>
       <div className="group">
-        <input
-          onClick={getSpot}
+        <Popup trigger={<input
           type="submit"
           className="button"
           defaultValue="Sign In"
-        />
+        />} position="right center">
+    <div>
+    <h5>{id} spot is empty</h5>
+    </div>
+  </Popup>
       </div>
-
+      <br></br>
+        
       <div className="group">
-        <label className="label">First name22</label>
+        <label className="label">First name</label>
         <input type="text" id="fname" className="input" />
       </div>
       <div className="group">
         <label className="label">Last name</label>
-        <input type="text" id="fname" className="input" />
+        <input type="text" id="lname" className="input" />
       </div>
       <div className="group">
         <label className="label">Plat Number</label>
@@ -122,6 +132,12 @@ function Entry() {
           className="button"
           defaultValue="Sign In"
         />
+         <Modal>
+        <div id="color">
+          <h1>successfully added </h1>
+          <button className="buttonPop" onClick={close}>CLOSE</button>
+        </div>
+      </Modal>
       </div>
     </div>
   );
