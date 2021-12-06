@@ -92,11 +92,10 @@ function Entry() {
         />
       </div>
       <div className="group">
-        <Popup trigger={<input
-          type="submit"
+        <Popup trigger={<button
           className="button"
           defaultValue="Sign In"
-        />} position="right center">
+        >submit</button>} position="right center">
     <div>
     <h5>{id} spot is empty</h5>
     </div>
@@ -126,12 +125,11 @@ function Entry() {
         <input type="text" id="spotId" className="input" />
       </div>
       <div className="group">
-        <input
+        <button
           onClick={addUser}
-          type="submit"
           className="button"
           defaultValue="Sign In"
-        />
+        >submit</button>
          <Modal>
         <div id="color">
           <h1>successfully added </h1>
