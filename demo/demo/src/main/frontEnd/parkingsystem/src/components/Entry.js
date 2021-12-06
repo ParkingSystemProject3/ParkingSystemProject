@@ -2,8 +2,14 @@ import axios from "axios";
 import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import { useModal } from 'react-hooks-use-modal';
+
 
 function Entry() {
+  const [Modal, open, close, isOpen] = useModal('root', {
+    preventScroll: true,
+    closeOnOverlayClick: false
+  });
   let slotType;
   const[id,setId]=useState(0);
 
@@ -54,6 +60,7 @@ function Entry() {
       .catch(function (error) {
         console.error(error);
       });
+      open();
   }
 
   return (
@@ -125,6 +132,12 @@ function Entry() {
           className="button"
           defaultValue="Sign In"
         />
+         <Modal>
+        <div id="color">
+          <h1>successfully added </h1>
+          <button className="buttonPop" onClick={close}>CLOSE</button>
+        </div>
+      </Modal>
       </div>
     </div>
   );
